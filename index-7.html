@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>LE ENGLISH 2026-10 Learning Report | 최예준</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;family=Pretendard:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><style>
+    /* ==================================================
+       1. DESIGN SYSTEM & CSS VARIABLES
+       ================================================== */
+    :root {
+      /* Brand Palette: Deep Navy & Educational Blue */
+      --color-primary: #0F172A;          /* Slate 900 */
+      --color-primary-light: #1E293B;    /* Slate 800 */
+      --color-accent: #1D4ED8;           /* Blue 700 */
+      --color-accent-subtle: #EFF6FF;     /* Blue 50 */
+      --color-accent-border: #BFDBFE;     /* Blue 200 */
+
+      --color-teal: #0D9488;             /* Teal 600 - Observed state */
+      --color-teal-subtle: #F0FDFA;       /* Teal 50 */
+      --color-teal-border: #99F6E4;       /* Teal 200 */
+
+      --color-bg: #F8FAFC;               /* Slate 50 */
+      --color-surface: #FFFFFF;
+      --color-surface-subtle: #F1F5F9;   /* Slate 100 */
+      --color-border: #E2E8F0;           /* Slate 200 */
+
+      --color-text-main: #0F172A;
+      --color-text-body: #334155;        /* Slate 700 */
+      --color-text-muted: #64748B;       /* Slate 500 */
+      --color-text-light: #94A3B8;       /* Slate 400 */
+
+      /* Typography */
+      --font-ko: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+      --font-en: 'Plus Jakarta Sans', var(--font-ko);
+
+      /* Layout */
+      --container-max-w: 640px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      /* Elevation */
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-card: 0 4px 12px -2px rgba(15, 23, 42, 0.05), 0 2px 4px -1px rgba(15, 23, 42, 0.02);
+      --shadow-elevated: 0 12px 28px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.03);
+
+      /* Motion */
+      --timing-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-normal: 0.5s;
+    }
+
+    /* ==================================================
+       2. RESET & BASE RULES
+       ================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text-body);
+      font-family: var(--font-ko);
+      font-size: 16px;
+      line-height: 1.78;
+      letter-spacing: -0.015em;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea {
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .report-shell {
+      max-width: var(--container-max-w);
+      margin: 0 auto;
+      padding: 0 20px 80px 20px;
+    }
+
+    /* Standard Section Structure */
+    .report-section {
+      padding: 44px 0;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 1.4375rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1.4;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 0.96875rem;
+      color: var(--color-text-body);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .content-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-card);
+    }
+
+    /* Scroll Reveal Engine */
+    .reveal-item {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s var(--timing-smooth), transform 0.6s var(--timing-smooth);
+      will-change: opacity, transform;
+    }
+
+    .reveal-item.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================================================
+       01 HERO
+       ================================================== */
+    .report-hero {
+      padding: 60px 0 36px 0;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge-brand {
+      font-family: var(--font-en);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: var(--color-primary);
+      color: #FFFFFF;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .hero-badge-student {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-text-body);
+      background: var(--color-surface-subtle);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+    }
+
+    .hero-badge-term {
+      font-family: var(--font-en);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      background: var(--color-accent-subtle);
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .hero-headline {
+      font-size: 1.875rem;
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--color-primary);
+      margin-bottom: 18px;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-headline span.accent-text {
+      color: var(--color-accent);
+    }
+
+    .hero-narrative {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--color-text-body);
+      border-left: 2px solid var(--color-accent-border);
+      padding-left: 16px;
+    }
+
+    .hero-narrative p + p {
+      margin-top: 10px;
+    }
+
+    .record-metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .record-metric-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 16px 8px;
+      text-align: center;
+    }
+
+    .record-metric-card.active-metric {
+      border-color: var(--color-accent-border);
+      background: var(--color-accent-subtle);
+    }
+
+    .metric-digits {
+      font-family: var(--font-en);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .record-metric-card.active-metric .metric-digits {
+      color: var(--color-accent);
+    }
+
+    .metric-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    .record-statement {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* ==================================================
+       10 LEARNING ARCHIVE CTA
+       ================================================== */
+    .archive-card {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .archive-eyebrow {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 0.6875rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #93C5FD;
+      margin-bottom: 8px;
+    }
+
+    .archive-title {
+      font-size: 1.375rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 10px;
+      color: #FFFFFF;
+    }
+
+    .archive-body {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: #94A3B8;
+      max-width: 440px;
+      margin: 0 auto 20px auto;
+    }
+
+    .archive-meta-tag {
+      font-size: 0.8125rem;
+      color: #CBD5E1;
+      margin-bottom: 18px;
+    }
+
+    .archive-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 320px;
+      min-height: 52px;
+      background: #FFFFFF;
+      color: var(--color-primary);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease, background 0.2s ease;
+      touch-action: manipulation;
+    }
+
+    .archive-btn:hover {
+      transform: translateY(-2px);
+      background: #F8FAFC;
+    }
+
+    .archive-btn:active {
+      transform: translateY(0);
+    }
+
+    .brand-footer {
+      padding: 60px 0 20px 0;
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+      margin-top: 40px;
+    }
+
+    .footer-brand {
+      font-family: var(--font-en);
+      font-size: 1.0625rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .footer-slogan {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-text-body);
+      margin-bottom: 12px;
+    }
+
+    .footer-sub {
+      font-family: var(--font-en);
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .footer-copyright {
+      font-size: 0.6875rem;
+      color: var(--color-text-light);
+      font-family: var(--font-en);
+    }
+
+/* Scoped editorial presentation: existing report tokens and Golden Sample CSS remain untouched. */
+.editorial-hero .hero-headline { color:var(--color-primary); margin-bottom:16px; }
+.editorial-subtitle { font-size:1rem; font-weight:600; color:var(--color-accent); margin-bottom:20px; }
+.editorial-flow { list-style:none; padding:0; margin:24px 0 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.editorial-flow li { min-width:0; padding:14px 10px; border:1px solid var(--color-border); border-radius:14px; background:var(--color-surface); }
+.editorial-flow strong { display:block; font-family:var(--font-en); font-size:.875rem; color:var(--color-accent); overflow-wrap:anywhere; }
+.editorial-flow span { display:block; font-size:.875rem; line-height:1.6; margin-top:6px; }
+.editorial-card { padding:24px; border:1px solid var(--color-border); border-radius:20px; background:#fff; }
+.editorial-card .section-desc { margin-bottom:0; }
+.editorial-card p + p,.editorial-next-example p { margin-top:10px; }
+.editorial-evidence { margin-top:18px; }
+.editorial-card h3 { font-size:.875rem; line-height:1.6; font-weight:700; margin:0 0 8px; }
+.editorial-evidence ul { list-style:none; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.editorial-evidence li { min-width:0; max-width:100%; padding:9px 12px; border:1px solid var(--color-border); border-radius:10px; background:var(--color-surface-subtle); font-size:1rem; line-height:1.6; overflow-wrap:anywhere; }
+.editorial-callout { margin-top:18px; border-left:3px solid var(--color-teal); padding:12px 16px; background:var(--color-teal-subtle); border-radius:0 10px 10px 0; }
+.editorial-callout p { font-size:1rem; line-height:1.8; }
+.editorial-details { margin-top:16px; border-top:1px solid var(--color-border); }
+.editorial-details summary { min-height:48px; display:list-item; padding:14px 6px; cursor:pointer; font-size:.875rem; font-weight:600; color:var(--color-accent); }
+.editorial-details summary:focus-visible { outline:3px solid var(--color-accent); outline-offset:3px; border-radius:6px; }
+.editorial-details ul { padding-left:22px; margin:4px 0 8px; }
+.editorial-details li { font-size:1rem; line-height:1.8; margin:8px 0; overflow-wrap:anywhere; }
+.editorial-secondary .section-title { font-size:1.25rem; }
+.editorial-secondary .editorial-card { padding:20px; }
+.editorial-transfer { padding-left:22px; font-size:.875rem; line-height:1.8; margin:18px 0; }
+.editorial-transfer li { margin:6px 0; }
+.editorial-next-example { padding:16px; border:1px solid rgba(255,255,255,.25); border-radius:12px; background:rgba(255,255,255,.08); font-size:1rem; line-height:1.8; }
+.editorial-section,.editorial-hero,.editorial-card,.editorial-next-example { min-width:0; overflow-wrap:anywhere; }
+@media(max-width:480px) { .editorial-card { padding:20px; } .editorial-flow { grid-template-columns:1fr; } .editorial-flow li { display:flex; align-items:center; gap:10px; } .editorial-flow strong { flex:0 1 46%; } .editorial-flow span { margin:0; } }
+
+.editorial-next-step .next-step-tag { font-size:.875rem; }
+
+/* Generic publishing variants; no student-specific selectors. */
+.editorial-hero .hero-headline,.editorial-subtitle,.editorial-section .section-title,.editorial-next-step .next-step-title,.editorial-closing { white-space:pre-line; }
+.editorial-flow { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.editorial-takeaway { margin-top:18px; padding:14px 16px; background:var(--color-accent-subtle); border-left:3px solid var(--color-accent); border-radius:0 10px 10px 0; font-size:1rem; font-weight:600; }
+.editorial-panels { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.editorial-panels:empty { display:none; }
+.editorial-panel { min-width:0; padding:16px; background:var(--color-surface-subtle); border:1px solid var(--color-border); border-radius:var(--radius-md); }
+.editorial-panel h3 { font-size:1rem; }
+.editorial-panel p { font-size:1rem; line-height:1.8; margin:12px 0; }
+.editorial-formula { display:block; color:var(--color-accent); font-size:1rem; }
+.editorial-panel ul { list-style:none; padding:0; }
+.editorial-panel li { padding:8px 0; font-size:1rem; overflow-wrap:anywhere; }
+.editorial-transfer-board { list-style:none; padding:0; margin:20px 0; display:grid; gap:8px; }
+.editorial-transfer-board li { padding:16px; border:1px solid rgba(255,255,255,.2); border-radius:12px; background:rgba(255,255,255,.06); }
+.editorial-transfer-board li + li::before { content:'↓'; display:block; color:#93c5fd; margin-bottom:8px; }
+.editorial-transfer-board span,.editorial-october-goal span { display:block; font-size:.875rem; color:#93c5fd; }
+.editorial-transfer-board strong,.editorial-october-goal strong { display:block; font-size:1rem; overflow-wrap:anywhere; margin-top:6px; }
+.editorial-october-goal { margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,.2); }
+.editorial-closing { font-size:1rem; font-weight:600; margin-top:20px; }
+@media(max-width:480px) { .editorial-flow { grid-template-columns:repeat(2,minmax(0,1fr)); } .editorial-flow li { display:block; } .editorial-flow span { margin-top:6px; } .editorial-panels { grid-template-columns:1fr; } }
+
+/* October editorial layout, using the September palette and card geometry. */
+.section-desc,.archive-body { font-size:1rem; }
+a:focus-visible { outline:3px solid #1D4ED8; outline-offset:5px; }
+.archive-btn:focus-visible { outline-color:#93C5FD; }
+.highlights { display:grid; gap:12px; }
+.highlights h3 { font-size:1.125rem; color:var(--color-primary); margin-bottom:12px; }
+.highlight-label { font:700 .75rem var(--font-en); color:var(--color-accent); display:block; margin-bottom:8px; }
+.comparison { display:grid; gap:12px; margin:20px 0; }
+.expression { padding:16px; border:1px solid var(--color-border); border-radius:var(--radius-md); background:var(--color-surface-subtle); }
+.expression.learned { background:var(--color-accent-subtle); border-color:var(--color-accent-border); }
+.expression h3 { color:var(--color-text-body); }
+.expression blockquote { font:600 1.125rem/1.7 var(--font-en); color:var(--color-primary); }
+.expression.learned blockquote { color:var(--color-accent); }
+.learning-flow { font:700 .875rem/1.8 var(--font-en); color:var(--color-accent); margin-bottom:16px; }
+.record-metric-card { padding:24px 16px; }
+.metric-digits { font-size:2.5rem; margin-bottom:12px; }
+.metric-title { font-size:1rem; color:var(--color-text-body); }
+.footer-copyright { color:var(--color-text-muted); }
+@media(prefers-reduced-motion:reduce) { * { transition:none!important; } .archive-btn:hover { transform:none; } }
+
+</style></head>
+<body><main class="report-shell">
+<header class="report-hero editorial-hero">
+  <div class="hero-meta"><span class="hero-badge-brand">LE ENGLISH</span><span class="hero-badge-student">최예준 | 초등학교 5학년</span><span class="hero-badge-term">2026 OCTOBER · MONTHLY LEARNING REPORT</span></div>
+  <h1 class="hero-headline">읽고 쓰던 영어를,<br>이제 상황 속에서 말하는 연습으로.</h1>
+  <div class="hero-narrative"><p>10월 예준이는 영어 문장을 읽고 쓰는 학습에서 한 걸음 더 나아가, 문장의 의미를 이해하고 그림과 상황을 보며 직접 영어로 표현하는 활동을 진행했습니다.</p><p>이번 달의 핵심은 <strong>‘아는 영어’를 ‘사용하는 영어’로 연결하는 것</strong>이었습니다.</p></div>
+</header>
+<section class="report-section" aria-labelledby="highlights-title">
+  <span class="section-eyebrow">01. OCTOBER HIGHLIGHTS</span>
+  <h2 class="section-title" id="highlights-title">10월의 핵심 학습 변화</h2>
+  <div class="highlights">
+    <article class="editorial-card"><span class="highlight-label">READING</span><h3>읽기에서 → 맥락 이해로</h3><p>영어책 한 권을 읽고 그림과 앞뒤 문맥을 바탕으로 문장의 의미를 설명했습니다.</p><p>10월 7일, 맥락 읽기 활동 한 권을 끝까지 수행했습니다.</p></article>
+    <article class="editorial-card"><span class="highlight-label">SPEAKING</span><h3>문장 암기에서 → 의미 중심 말하기로</h3><p>영어 문장을 20회씩 소리 내어 연습하고, 발음과 억양을 교정했습니다.</p><p>이후 글자를 보지 않고 상황과 의미만으로 영어를 말하는 활동에 도전했습니다.</p></article>
+    <article class="editorial-card"><span class="highlight-label">WRITING &amp; GRAMMAR</span><h3>문법 이해에서 → 실제 문장 활용으로</h3><p>단수·복수, 현재시제, 형용사, 관사, 장소 전치사 등을 학습했습니다.</p><p>그림을 보고 필요한 문법과 단어를 선택하여 문장을 직접 완성하고 말하는 연습으로 연결했습니다.</p></article>
+  </div>
+</section>
+<section class="report-section" aria-labelledby="moment-title">
+  <span class="section-eyebrow">02. LEARNING MOMENT</span><h2 class="section-title" id="moment-title">이번 달 가장 의미 있었던 순간</h2>
+  <div class="editorial-card"><p class="editorial-subtitle">10월 13일 | Look &amp; Speak</p><p>책을 읽고 있는 아이의 그림을 보고 예준이가 말했습니다.</p>
+    <div class="comparison"><div class="expression"><h3>예준이의 표현</h3><blockquote lang="en">"He is seeing a book."</blockquote></div><div class="expression learned"><h3>함께 익힌 표현</h3><blockquote lang="en">"He is reading a book."</blockquote></div></div>
+    <p>예준이는 그림 속 행동을 이해하고 있었습니다. 다만 한국어의 '책을 보다'를 영어의 see와 직접 연결했습니다.</p>
+    <p>이 장면에서 확인한 것은 <strong>말하고 싶은 의미를 아는 것과 그 의미를 자연스러운 영어로 표현하는 것은 서로 다른 능력</strong>이라는 점입니다.</p>
+    <p>앞으로는 한국어 문장을 하나씩 영어로 바꾸기보다, 그림과 상황에서 영어 표현을 직접 떠올리는 연습을 이어갑니다.</p>
+  </div>
+</section>
+<section class="report-section" aria-labelledby="insight-title">
+  <span class="section-eyebrow">03. TEACHER'S INSIGHT</span><h2 class="section-title" id="insight-title">선생님의 관찰</h2>
+  <div class="editorial-card"><p>10월에는 예준이가 영어를 어떻게 이해하고 표현하는지 구체적으로 살펴볼 수 있었습니다.</p><p>영어책을 읽고 내용을 설명하는 활동을 수행했고, 익힌 문장을 반복하여 소리 내어 말한 뒤 텍스트 없이 표현하는 연습도 진행했습니다.</p><p>특히 자유 말하기에서는 의미를 파악하고 있어도 적절한 영어 표현을 선택하는 데 교사의 도움이 필요한 경우가 관찰되었습니다.</p><p>이는 앞으로 무엇을 더 연습해야 하는지 알려주는 중요한 학습 기록입니다.</p><p class="editorial-takeaway">예준이의 다음 과제는 알고 있는 영어를 새로운 상황에서도 자연스럽게 꺼내어 사용하는 것입니다.</p></div>
+</section>
+<section class="report-section" aria-labelledby="next-title">
+  <span class="section-eyebrow">04. NEXT STEP</span><h2 class="section-title" id="next-title">11월에는 이렇게 이어갑니다</h2>
+  <div class="editorial-card"><div class="learning-flow" lang="en">LOOK → THINK → SPEAK → CONNECT</div><p>그림과 상황을 관찰하고, 전달하고 싶은 의미를 떠올린 뒤, 영어 문장으로 표현합니다.</p><p>한 문장을 정확하게 말하는 연습에서 나아가 <strong>두세 문장으로 생각을 연결하여 설명하는 활동</strong>을 확대하겠습니다.</p><p>다독에서는 즐겁게 읽는 경험을 유지하면서 맥락 읽기를 병행합니다.</p></div>
+</section>
+<section class="report-section" aria-labelledby="record-title">
+  <span class="section-eyebrow">05. CLASS RECORD</span><h2 class="section-title" id="record-title">10월 수업 현황</h2>
+  <div class="record-metric-card active-metric"><div class="metric-digits">16 / 16회</div><p class="metric-title">수업 이행률 <strong>100%</strong></p></div><p class="record-statement">예정된 16회 수업을 모두 진행했습니다.</p>
+</section>
+<section class="report-section" aria-labelledby="archive-title">
+  <div class="archive-card"><span class="archive-eyebrow">06. LEARNING ARCHIVE</span><h2 class="archive-title" id="archive-title">예준이의 실제 학습 기록 보기</h2><p class="archive-body">보고서에서 소개한 학습 과정과 수업 활동지를 확인하실 수 있습니다.</p><a class="archive-btn" href="https://drive.google.com/drive/folders/1uIBXIILS6hPg6kJnmA1fTUiHPrVn42Np" target="_blank" rel="noopener noreferrer" aria-label="최예준 학습 기록물 보기 (새 창)"><span>최예준 학습 기록물 보기</span><span aria-hidden="true">↗</span></a></div>
+</section>
+<footer class="brand-footer" aria-label="LE ENGLISH Brand Ending"><div class="footer-brand">LE ENGLISH | 리영어</div><div class="footer-slogan">아는 영어에서, 쓸 수 있는 영어로.</div><div class="footer-copyright">2026 October · Learning Report</div></footer>
+</main></body></html>
